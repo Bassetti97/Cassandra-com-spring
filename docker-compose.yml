@@ -1,0 +1,30 @@
+version: '3'
+services:
+  cassandra:
+    image: cassandra:4.1
+    container_name: cassandra
+    ports:
+      - "9042:9042"
+    environment:
+      - CASSANDRA_CLUSTER_NAME=Test Cluster
+      - CASSANDRA_DC=datacenter1
+      - CASSANDRA_RACK=rack1
+    volumes:
+      - cassandra-data:/var/lib/cassandra
+
+  app:
+    image: your-spring-boot-app:latest
+    container_name: spring_boot_app
+    depends_on:
+      - cassandra
+    environment:
+      - SPRING_APPLICATION_NAME=cassandra
+      - SPRING_DATA_CASSANDRA_CONTACT_POINTS=cassandra:9042
+      - SPRING_DATA_CASSANDRA_LOCAL_DATACENTER=datacenter1
+      - SPRING_DATA_CASSANDRA_KEYSPACE_NAME=pop_divas
+      - SPRING_DATA_CASSANDRA_SCHEMA_ACTION=none
+    ports:
+      - "8080:8080"
+
+volumes:
+  cassandra-data:

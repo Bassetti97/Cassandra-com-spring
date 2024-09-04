@@ -1,0 +1,7 @@
+spring:
+  data:
+    cassandra:
+      keyspace-name: pop_divas
+      contact-points: cassandra:9042
+      schema-action: none
+

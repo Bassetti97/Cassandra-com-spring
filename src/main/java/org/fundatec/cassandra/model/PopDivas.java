@@ -12,7 +12,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("pop_divas")
+@Table("pop_divas_table")
 public class PopDivas {
 
     @PrimaryKey
